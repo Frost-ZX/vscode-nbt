@@ -3,10 +3,12 @@ import path from 'path'
 import { Readable, Writable } from 'stream'
 import tar from 'tar'
 import type { Logger } from './common/types'
+import { getUriPreifx } from './Config'
 import type { Job } from './Downloader'
 import { Downloader } from './Downloader'
 
-const MCMETA = 'https://raw.githubusercontent.com/misode/mcmeta'
+const MCMETA = getUriPreifx('raw')
+const MCMETA_TARBALL = getUriPreifx('tarball')
 const FALLBACK_VERSION = '1.18.2'
 
 const cacheRoot = envPaths('vscode-nbt').cache
@@ -61,7 +63,7 @@ export async function getAssets(dataVersion: number | undefined, logger: Logger)
 		}),
 		downloader.download({
 			id: `${version}-assets`,
-			uri: `https://github.com/misode/mcmeta/tarball/${version}-assets-json`,
+			uri: `${MCMETA_TARBALL}/${version}-assets-json`,
 			transformer: data => data,
 			cache: cacheOptions(async data => {
 				const entries = await readTarGz(data, (path: string) => {

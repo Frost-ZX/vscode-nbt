@@ -25,6 +25,22 @@
 		}
 	},
 	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "NBT Viewer",
+			"properties": {
+				"vscode-nbt.rawUriPrefix": {
+					"type": "string",
+					"default": "https://raw.githubusercontent.com/misode/mcmeta",
+					"format": "uri"
+				},
+				"vscode-nbt.tarballUriPrefix": {
+					"type": "string",
+					"default": "https://github.com/misode/mcmeta/tarball",
+					"format": "uri"
+				}
+			}
+		},
 		"customEditors": [
 			{
 				"viewType": "nbtEditor.nbt",
